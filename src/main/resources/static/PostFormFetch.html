@@ -116,14 +116,17 @@
         <h2>Liste des catégories ({{_embedded.categories.length}} / {{page.totalElements}})</h2>
         <TABLE>
         {{! Un commentaire Mustache }}
-        <TR><TH>Code</TH><TH>Libelle</TH><TH>Description</TH></TR>
+            <TR><TH>Code</TH><TH>Libelle</TH><TH>Description</TH><TH>Action</TH></TR>
         {{! Pour chaque categorie dans le tableau 'categories' }}
         {{#_embedded.categories}}
         {{! Une ligne dans la table }}
-        <TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD></TR>
+            <TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD><TD><input type="button" value="Supprimer" id="supprimer"/></TD></TR>
         {{/_embedded.categories}}
         </TABLE>
     </script>
+
+    <script src="Supprimer.js"></script>
+
 </body>
 
 </html>
