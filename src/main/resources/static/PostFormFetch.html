@@ -91,6 +91,26 @@
                 })
                 .catch(afficheMessage);
         }
+
+        function supprimer(code){
+            fetch("api/categories/" + code,{
+                method : "delete"
+            })
+                .then(
+                    response => {
+                        // On vérifie le code de retour de la requête
+                        switch (response.status) {
+                            case 200: // Created: ça s'est bien passé
+                                chargeCategories();
+                                break;
+                            case 409: // Conflict: doublon dans les noms
+                                afficheMessage("Impossible de supprimer cette catégorie");
+                                break;
+                        }
+                    })
+                .catch(afficheMessage)
+        }
+
     </script>
 </head>
 
@@ -120,12 +140,11 @@
         {{! Pour chaque categorie dans le tableau 'categories' }}
         {{#_embedded.categories}}
         {{! Une ligne dans la table }}
-            <TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD><TD><input type="button" value="Supprimer" id="supprimer"/></TD></TR>
+            <TR><TD>{{code}}</TD><TD>{{libelle}}</TD><TD>{{description}}</TD><TD><button type="button" onclick="supprimer({{code}})">Supprimer</button></TD></TR>
         {{/_embedded.categories}}
         </TABLE>
     </script>
 
-    <script src="Supprimer.js"></script>
 
 </body>
 
